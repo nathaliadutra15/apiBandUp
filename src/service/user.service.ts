@@ -36,4 +36,14 @@ export class UserService {
             return error;
         }
     }
+
+    updateUser(username: String, user: IUser) {
+        try {
+            return userMongoDB.updateOne({ usuario: username }, user);
+        } catch (error) {
+            return error;
+        }
+    }
+
+
 } 

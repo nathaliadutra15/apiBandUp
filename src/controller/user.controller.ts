@@ -40,4 +40,16 @@ export class UserController {
             return res.status(201).send(usernameFound);
         }
     }
+
+    @Patch('/:username')
+    async updateUser(@Param() username, @Body() user: IUser, @Res() res: Response){
+        const updatedUser = await this.userService.updateUser(username.username,user);
+
+        if (updatedUser.modifiedCount == 0) {
+            return res.status(422).send({ message: "Usuário não foi encontrado." });
+        } else {
+            return res.status(201).send({message: "Usuário atualizado com sucesso."});
+        }
+    }
+
 }
