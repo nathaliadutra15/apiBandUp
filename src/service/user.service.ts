@@ -1,18 +1,39 @@
 import { Injectable } from "@nestjs/common";
-import { response } from "express";
 import { IUser } from "src/model/user.model";
-const postagemUser = require('../model/user.mongo.model');
+const userMongoDB = require('../model/user.mongo.model');
 
 @Injectable()
 export class UserService {
 
-     setUser(user: IUser) {
+    setUser(user: IUser) {
         try {
-            console.log("Criado");
-             postagemUser.create(user);
-            response.status(201).json({ message: "Usuário cadastrado com sucesso!" });
+            return userMongoDB.create(user);
         } catch (error) {
-            response.status(500);
+            return error;
         }
     }
-}
+
+    getAllUsers() {
+        try {
+            return userMongoDB.find();
+        } catch (error) {
+            return error;
+        }
+    }
+
+    getUserByUsername(username: String) {
+        try {
+            return userMongoDB.find({ usuario: username }).exec();
+        } catch (error) {
+            return error;
+        }
+    }
+
+    getUserByEmail(email: String) {
+        try {
+            return userMongoDB.find({ email: email }).exec();
+        } catch (error) {
+            return error;
+        }
+    }
+} 
