@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Patch, Post, Put, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from "@nestjs/common";
+import console from "console";
 import { Response } from 'express';
 import { IUser } from "src/model/user.model";
 import { UserService } from "src/service/user.service";
@@ -27,17 +28,23 @@ export class UserController {
     }
 
     @Get('/list')
-    getAllUsers() {
-        return this.userService.getAllUsers();
+    async getAllUsers(@Res() res: Response) {
+        const userList = await this.userService.getAllUsers();
+
+        if (userList.length == 0) {
+            return res.status(422).send({ message: "Não foi encontrado usuários cadastrados." });
+        } else {
+            return res.status(200).send(userList);
+        }
     }
 
     @Get('/:username')
     async getUser(@Param() username, @Res() res: Response) {
         const usernameFound = await this.userService.getUserByUsername(username.username);
-        if (usernameFound == null) {
+        if (usernameFound.length == 0) {
             return res.status(422).send({ message: "Usuário não foi encontrado." });
         } else {
-            return res.status(201).send(usernameFound);
+            return res.status(200).send(usernameFound);
         }
     }
 
@@ -48,8 +55,20 @@ export class UserController {
         if (updatedUser.modifiedCount == 0) {
             return res.status(422).send({ message: "Usuário não foi encontrado." });
         } else {
-            return res.status(201).send({message: "Usuário atualizado com sucesso."});
+            let currentDate = new Date();
+            user.updatedAt = currentDate;
+            return res.status(200).send({message: "Usuário atualizado com sucesso."});
         }
     }
 
+    @Delete('/remove/:username')
+    async deleteUser(@Param() username, @Res() res: Response){
+        const deletedUser = await this.userService.deleteUser(username.username);
+        
+        if (deletedUser.deletedCount == 0) {
+            return res.status(422).send({ message: "Usuário não encontrado para remover." });
+        } else {
+            return res.status(200).send({message: "Usuário deletado com sucesso."});
+        }
+    }
 }

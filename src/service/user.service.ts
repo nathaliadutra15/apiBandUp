@@ -45,5 +45,11 @@ export class UserService {
         }
     }
 
-
+    deleteUser(username: String){
+        try {
+            return userMongoDB.deleteOne({ usuario: username });
+        } catch (error) {
+            return error;
+        }
+    }
 } 

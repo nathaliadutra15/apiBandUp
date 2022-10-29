@@ -11,5 +11,7 @@ export interface IUser {
     }];
     estadoUF: string;
     cidade: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
