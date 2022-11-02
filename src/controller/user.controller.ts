@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from "@nestjs/common";
-import console from "console";
 import { Response } from 'express';
 import { IUser } from "src/model/user.model";
 import { UserService } from "src/service/user.service";
