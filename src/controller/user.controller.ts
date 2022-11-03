@@ -12,13 +12,19 @@ export class UserController {
         const userFoundByUsername = await this.userService.getUserByUsername(user.usuario);
         const userFoundByEmail = await this.userService.getUserByEmail(user.email);
 
-        //Check if it already has username or email
-        if (Object.keys(user).length == 0) {
+        //Check if it already has username or email / empty values
+        if ((Object.keys(user).length == 0) || 
+        (user.email == undefined) || 
+        (user.usuario == undefined) ||
+        (user.email == "") || 
+        (user.usuario == "")) {
             return res.status(422).send({ message: "Preencha todos os campos." });
         } else if (userFoundByUsername.length != 0) {
-            return res.status(422).send({ message: "Nome de usuário já existente." });
+            return res.status(422).send({ message: "Nome de usuário já existe." });
         } else if (userFoundByEmail.length != 0) {
             return res.status(422).send({ message: "Email já cadastrado." });
+        } else if (user.senha == undefined || user.senha == "")  {
+            return res.status(422).send({ message: "Insira uma senha." });
         }
         else {
             this.userService.setUser(user);
