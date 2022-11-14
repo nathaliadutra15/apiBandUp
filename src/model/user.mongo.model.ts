@@ -14,8 +14,33 @@ const postagemUser = new Schema({
         nivelExperiencia: String,
     }],
     estadoUF: String,
-    cidade: String
-
+    cidade: String,
+    posts: [{
+        createdAt: Date,
+        updatedAt: Date,
+        postTxt: String,
+        midia: Object,
+        events: [{
+            nomeEvento: String,
+            dataEvento: Date,
+        }],
+        comments: [{
+            usuario: String,
+            comment: String,
+        }],
+        sharings: [{
+            usuario: String,
+        }],
+        likes: [{
+            usuario: String,
+        }],
+        savings: [{
+            usuario: String,
+        }],
+        isShared: Boolean,
+    }],
+    createdAt: Date,
+    updatedAt: Date,
 });
 
 
