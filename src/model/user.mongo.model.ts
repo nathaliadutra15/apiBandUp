@@ -19,7 +19,7 @@ const postagemUser = new Schema({
         createdAt: Date,
         updatedAt: Date,
         postTxt: String,
-        midia: Object,
+        midia:Object,
         events: [{
             nomeEvento: String,
             dataEvento: Date,
@@ -38,6 +38,12 @@ const postagemUser = new Schema({
             usuario: String,
         }],
         isShared: Boolean,
+    }],
+    seguidores:[{
+        usuario:String,
+    }],
+    seguindo:[{
+        usuario:String,
     }],
     createdAt: Date,
     updatedAt: Date,

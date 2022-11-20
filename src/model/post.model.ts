@@ -2,7 +2,7 @@ export interface IPost {
     createdAt: Date;
     updatedAt: Date;
     postTxt: string;
-    midia: string[];
+    midia: any;
     events: [{
         nomeEvento: string;
         dataEvento: Date;

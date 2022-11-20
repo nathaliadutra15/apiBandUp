@@ -4,7 +4,7 @@ import { IUser } from "src/model/user.model";
 import { UserPostService } from "src/service/userPost.service";
 
 @Controller('post')
-export class UserPost {
+export class UserPostController {
     constructor(private userPostService: UserPostService ) { }
 
     @Patch('create/:username')

@@ -17,7 +17,7 @@ export interface IUser {
         createdAt: Date;
         updatedAt: Date;
         postTxt: string;
-        midia: Object;
+        midia: any;
         events: [{
             nomeEvento: string;
             dataEvento: Date;
@@ -37,6 +37,12 @@ export interface IUser {
         }];
         isShared: boolean;
     }];
+    seguidores:[{
+        usuario:string;
+    }],
+    seguindo:[{
+        usuario:string;
+    }],
     createdAt: Date;
     updatedAt: Date;
 }
