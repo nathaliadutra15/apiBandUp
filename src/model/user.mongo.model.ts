@@ -9,6 +9,7 @@ const postagemUser = new Schema({
     nome: String,
     dataNasc: Date,
     generoMusical: Array,
+    urlImg:String,
     instrumentos: [{
         nomeInstrumento: String,
         nivelExperiencia: String,
@@ -16,6 +17,7 @@ const postagemUser = new Schema({
     estadoUF: String,
     cidade: String,
     posts: [{
+        usuario: String,
         createdAt: Date,
         updatedAt: Date,
         postTxt: String,

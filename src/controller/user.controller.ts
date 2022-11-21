@@ -83,4 +83,10 @@ export class UserController {
         const follower = await this.userService.setFollower(usernameOrigem.usernameOrigem, usernameDestino.usernameDestino);
         return following;
     }
+
+    @Post('like/:usernameOrigem/:id')
+    async setLike(@Param() usernameOrigem, @Param() id){
+        const sendLike = await this.userService.setLike(usernameOrigem.usernameOrigem,id.id);
+        return sendLike;
+    }
 }

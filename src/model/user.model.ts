@@ -7,6 +7,7 @@ export interface IUser {
     nome: string;
     dataNasc: Date;
     generoMusical: string[];
+    urlImg: string;
     instrumentos: [{
         nomeInstrumento: string;
         nivelExperiencia: string;
@@ -14,6 +15,7 @@ export interface IUser {
     estadoUF: string;
     cidade: string;
     posts: [{
+        usuario: string;
         createdAt: Date;
         updatedAt: Date;
         postTxt: string;

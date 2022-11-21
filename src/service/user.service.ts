@@ -70,4 +70,12 @@ export class UserService {
         }
     }
 
+    setLike(usernameOrigem: String, id: String){
+        try {
+            return userMongoDB.updateOne({'posts._id':id }, { $push: { "posts.$.likes": { usuario: usernameOrigem } } });
+        } catch (error) {
+            return error;
+        }
+    }
+
 } 
