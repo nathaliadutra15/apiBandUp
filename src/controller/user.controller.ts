@@ -76,4 +76,11 @@ export class UserController {
             return res.status(200).send({message: "Usuário deletado com sucesso."});
         }
     }
+
+    @Post('/follow/:usernameOrigem/:usernameDestino')
+    async setFollowing(@Param() usernameOrigem, @Param() usernameDestino){
+        const following = await this.userService.setFollowing(usernameOrigem.usernameOrigem, usernameDestino.usernameDestino);
+        const follower = await this.userService.setFollower(usernameOrigem.usernameOrigem, usernameDestino.usernameDestino);
+        return following;
+    }
 }

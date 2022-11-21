@@ -6,7 +6,7 @@ Injectable()
 export class UserPostService {
     createPost(username:string ,post: IUser) {
         try {
-            return userMongoDB.updateOne({ usuario: username }, post);
+            return userMongoDB.updateOne({ usuario: username }, {$push:{"posts":post}});
         } catch (error) {
             return error;
         }

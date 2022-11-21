@@ -45,11 +45,29 @@ export class UserService {
         }
     }
 
-    deleteUser(username: String){
+    deleteUser(username: String) {
         try {
             return userMongoDB.deleteOne({ usuario: username });
         } catch (error) {
             return error;
         }
     }
+
+    setFollowing(usernameOrigem: String, usernameDestino: String) {
+        try {
+            return userMongoDB.updateOne({ usuario: usernameOrigem }, { $push: { "seguindo": { usuario: usernameDestino } } });
+
+        } catch (error) {
+            return error;
+        }
+    }
+
+    setFollower(usernameOrigem: String, usernameDestino: String) {
+        try {
+            return userMongoDB.updateOne({ usuario: usernameDestino }, { $push: { "seguidores": { usuario: usernameOrigem } } });
+        } catch (error) {
+            return error;
+        }
+    }
+
 } 
